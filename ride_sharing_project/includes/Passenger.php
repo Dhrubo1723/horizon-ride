@@ -15,6 +15,7 @@ class Passenger extends User {
 
     public function saveAdditionalInfo($userID) {
         $db = Database::getInstance()->getConnection();
+        
         $query = "INSERT INTO passengers (passengerID, paymentMethod) 
                   VALUES ('$userID', '$this->paymentMethod')";
         $db->query($query);

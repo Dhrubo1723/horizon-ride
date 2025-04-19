@@ -2,16 +2,14 @@
 require_once 'Database.php';
 session_start();
 
-// Initialize login status message
 $loginMessage = '';
 
-// Check if the form is submitted
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect user input from the login form
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Query the database to check if the user exists
+    
     $db = Database::getInstance()->getConnection();
     $query = "SELECT * FROM users WHERE email='$email'";
 
@@ -19,13 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verify the password
         if (password_verify($password, $user['password'])) {
-            // If login is successful, start a session and store user data
-            $_SESSION['user'] = $user['email']; // Store the email in the session
-            $_SESSION['user_type'] = $user['type']; // Store the user type in the session
-
-            // Redirect to dashboard after successful login
+            $_SESSION['user'] = $user['email']; 
+            $_SESSION['user_type'] = $user['type']; 
             header("Location: dashboard.php");
             exit();
         } else {

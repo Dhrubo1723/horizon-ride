@@ -68,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php endif; ?>
 
         <?php if ($rideCancelMessage): ?>
-            <!-- No CSS for the cancel message -->
             <div class="ride-cancel-message">
                 <?php echo $rideCancelMessage; ?>
             </div>

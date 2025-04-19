@@ -13,15 +13,12 @@ abstract class User {
         $db = Database::getInstance()->getConnection();
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        // Insert the basic user info into the 'users' table
         $query = "INSERT INTO users (name, email, phone_number, password, type) 
                   VALUES ('$this->name', '$this->email', '$this->phone_number', '$hashedPassword', '$this->type')";
         $db->query($query);
 
-        // Get the last inserted user ID
         $userID = $db->insert_id;
 
-        // Call subclass method to insert specific user info (Driver/Passenger/Admin)
         $this->saveAdditionalInfo($userID);
     }
 
